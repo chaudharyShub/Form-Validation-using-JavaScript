@@ -1,0 +1,47 @@
+.user_main {
+    width: 70%;
+    min-height: 10em;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.user_main_inner {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 5px grey;
+    background-color: white;
+    transition: 0.2s ease;
+}
+
+.user_main_inner:hover {
+    box-shadow: 0 0 0;
+}
+
+.user_main_inner button {
+    width: 100%;
+}
+
+.user_main h3 {
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.user_main h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+}
+
+.key {
+    font-weight: 500;
+}
+
+.output_items {
+    display: flex;
+}
+
+.output_items span {
+    margin: 0 10px 0 2px;
+}

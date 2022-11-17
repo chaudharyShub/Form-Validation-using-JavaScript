@@ -1,0 +1,112 @@
+.input_main {
+    width: 100%;
+}
+
+.form_heading {
+    padding-top: 10px;
+    background-color: rgb(103, 58, 183);
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 11px;
+}
+
+.form_heading_inner {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2em;
+    box-shadow: 0 0 5px gray;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.form_heading_inner:hover {
+    box-shadow: 0 0 0;
+}
+
+.form_heading_inner>h4 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.form_heading p {
+    color: red;
+    font-size: 11px;
+}
+
+.form_heading_inner>input {
+    width: 80%;
+    height: 1.5em;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1em 0;
+}
+
+.input_container_parent {
+    box-shadow: 0 0 5px gray;
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    transition: 0.2s ease;
+}
+
+.input_container_parent:hover {
+    box-shadow: 0 0 0 ;
+}
+
+.input_container_outer {
+    justify-content: space-around;
+    display: flex;
+    padding: 20px 0 10px 0;
+    width: 100%;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.input_container {
+    height: 4em;
+}
+
+.input_container input {
+    height: 2.5em;
+    text-align: center;
+}
+
+.input_container p {
+    color: red;
+    font-size: 11px;
+}
+
+.input_field {
+    height: 4em;
+}
+
+.input_field button {
+    width: 10em !important;
+    height: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input_field p {
+    color: red;
+    font-size: 11px;
+    padding-left: 10px;
+}
+
+.addBtn {
+    width: 6em !important;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
