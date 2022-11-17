@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Form-Validation-using-JavaScript/static/css/main.ae901f05.css",
+    "main.css": "/Form-Validation-using-JavaScript/static/css/main.54ec7f11.css",
     "main.js": "/Form-Validation-using-JavaScript/static/js/main.67e09339.js",
     "index.html": "/Form-Validation-using-JavaScript/index.html",
-    "main.ae901f05.css.map": "/Form-Validation-using-JavaScript/static/css/main.ae901f05.css.map",
+    "main.54ec7f11.css.map": "/Form-Validation-using-JavaScript/static/css/main.54ec7f11.css.map",
     "main.67e09339.js.map": "/Form-Validation-using-JavaScript/static/js/main.67e09339.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae901f05.css",
+    "static/css/main.54ec7f11.css",
     "static/js/main.67e09339.js"
   ]
 }
