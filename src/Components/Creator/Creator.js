@@ -35,7 +35,7 @@ function Creator() {
         setInputDetail(prevState => ({
             ...prevState,
             labelName: value,
-            labelError: value.length > 4 ? false : true
+            labelError: value.length >= 4 ? false : true
         }));
     }
 
@@ -71,8 +71,8 @@ function Creator() {
             }));
         }
         if (context.state.inputTypeArray.length === 0 &&
-            !obj.labelError &&
-            !obj.inputError &&
+            !inputDetail.labelError &&
+            !inputDetail.inputError &&
             obj.inputLabel &&
             obj.type) {
             context.handleSubmit('ADD_INPUT_TYPE', obj);
@@ -80,8 +80,8 @@ function Creator() {
             setLabel('Untitled Label');
         }
         else if (context.state.inputTypeArray.length > 0 &&
-            !obj.labelError &&
-            !obj.inputError &&
+            !inputDetail.labelError &&
+            !inputDetail.inputError &&
             obj.inputLabel &&
             obj.type) {
             const isAvailable = context.state.inputTypeArray.find(item => item.inputLabel === inputDetail.labelName);
