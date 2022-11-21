@@ -6,8 +6,6 @@ import './Creator.css';
 function Creator() {
 
     const context = useContext(StateContext);
-    const [label, setLabel] = useState('Untitled Label');
-    const [input, setInput] = useState('Select Input Type');
 
     const style = {
         errorStyle: { border: '1.2px solid red' },
@@ -76,8 +74,10 @@ function Creator() {
             obj.inputLabel &&
             obj.type) {
             context.handleSubmit('ADD_INPUT_TYPE', obj);
-            setInput('Select Input Type');
-            setLabel('Untitled Label');
+            setInputDetail({
+                labelName: '',
+                inputType: '',
+            });
         }
         else if (context.state.inputTypeArray.length > 0 &&
             !inputDetail.labelError &&
@@ -86,8 +86,10 @@ function Creator() {
             obj.type) {
             const isAvailable = context.state.inputTypeArray.find(item => item.inputLabel === inputDetail.labelName);
             isAvailable ? alert("Same label can't exist !!!") : context.handleSubmit('ADD_INPUT_TYPE', obj);
-            setInput('Select Input Type');
-            setLabel('Untitled Label');
+            setInputDetail({
+                labelName: '',
+                inputType: '',
+            });
         }
     }
 
@@ -115,8 +117,9 @@ function Creator() {
                     <div className='input_container'>
                         <input
                             type='text'
-                            placeholder={label}
+                            placeholder='Untitled Label'
                             id='label'
+                            value={inputDetail.labelName}
                             onChange={onChangeLabel}
                             style={inputDetail.labelError ? style.errorStyle : style.simpleStyleInputLabel}
                         />
@@ -133,7 +136,7 @@ function Creator() {
                             aria-expanded="false">
                             {inputDetail.inputType.length > 1
                                 ? (inputDetail.inputType[0].toUpperCase() + inputDetail.inputType.substring(1))
-                                : input}
+                                : 'Select Input Type'}
                         </button>
                         <p style={{ display: `${inputDetail.inputError ? 'block' : 'none'}` }}>
                             *please enter input field
