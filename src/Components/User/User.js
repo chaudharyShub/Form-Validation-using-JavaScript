@@ -26,7 +26,7 @@ function User() {
                                 context.state.outputItems.map((element, index) => (
                                     <div key={index} className='output_items'>
                                         <p className='key'>
-                                            {element.inputLabel[0].toUpperCase() + element.inputLabel.substring(1)}
+                                            {element.inputLabel.toUpperCase()}
                                         </p>
                                         <span>:</span>
                                         <p className='value'>

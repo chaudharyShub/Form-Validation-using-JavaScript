@@ -79,12 +79,13 @@ function Creator() {
                 inputType: '',
             });
         }
-        else if (context.state.inputTypeArray.length > 0 &&
+        else if (context.state.inputTypeArray.length >= 1 &&
             !inputDetail.labelError &&
             !inputDetail.inputError &&
             obj.inputLabel &&
             obj.type) {
-            const isAvailable = context.state.inputTypeArray.find(item => item.inputLabel === inputDetail.labelName);
+            const isAvailable = context.state.inputTypeArray.find(item =>
+                item.inputLabel.toUpperCase() === inputDetail.labelName.toUpperCase());
             isAvailable ? alert("Same label can't exist !!!") : context.handleSubmit('ADD_INPUT_TYPE', obj);
             setInputDetail({
                 labelName: '',
