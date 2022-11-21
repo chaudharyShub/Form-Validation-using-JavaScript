@@ -2,7 +2,8 @@ export const initialHeadingState = {
     heading: {
         title: '',
         isError: false,
-    }
+    },
+    displayedHeading: '',
 }
 
 export const headingReducer = (state, action) => {
@@ -23,6 +24,11 @@ export const headingReducer = (state, action) => {
                     ...state.heading,
                     isError: true
                 }
+            }
+        case 'DISPLAY_HEADING':
+            return {
+                ...state,
+                displayedHeading: action.payload
             }
         default:
             return state;

@@ -5,15 +5,19 @@ import './User.css';
 function User() {
 
     const context = useContext(StateContext);
+    const heading = context.headingState.displayedHeading;
 
     return (
         <div className='user_main'>
             <h2>Preview :</h2>
             <div className='user_main_inner'>
                 {
-                    context.headingState.heading.title
-                        ? <h3>{context.headingState.heading.title}</h3>
-                        : ''
+                    heading
+                        ? <h3>
+                            {heading[0].toUpperCase() +
+                                heading.substring(1)}
+                        </h3>
+                        : null
                 }
                 {
                     context.state.outputItems.length
@@ -22,11 +26,11 @@ function User() {
                                 context.state.outputItems.map((element, index) => (
                                     <div key={index} className='output_items'>
                                         <p className='key'>
-                                            {element.inputLabel}
+                                            {element.inputLabel[0].toUpperCase() + element.inputLabel.substring(1)}
                                         </p>
                                         <span>:</span>
                                         <p className='value'>
-                                            {element.inputValue}
+                                            {element.inputValue[0].toUpperCase() + element.inputValue.substring(1)}
                                         </p>
                                     </div>
                                 ))

@@ -29,9 +29,10 @@
     box-shadow: 0 0 0;
 }
 
-.form_heading_inner>h4 {
+.form_heading_inner>h5 {
     margin-bottom: 20px;
-    font-size: 2.5rem;
+    margin-top: 5px;
+    font-size: 2rem;
     font-weight: 400;
 }
 

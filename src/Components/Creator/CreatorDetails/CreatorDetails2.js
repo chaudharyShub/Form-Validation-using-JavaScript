@@ -11,7 +11,7 @@ function CreatorDetails2() {
         const obj = context.state.inputTypeArray.find(item => item.id === id);
         if (!obj) return;
         obj.inputValue = value;
-        obj.inputChildError = value.length > 4 ? false : true
+        obj.inputChildError = value.length > 4 ? false : true;
         context.handleSubmit({
             type: 'UPDATE_INPUT',
             paylod: {
@@ -32,7 +32,6 @@ function CreatorDetails2() {
         for (let i = 0; i < context.state.inputTypeArray.length; i++) {
             let target = e.target[i];
             let errorMsg = e.target.children[0].childNodes[i].children[2];
-            // console.log(e.target.children[0].childNodes[i].children[2].style.display);
             if (target.value.length <= 4) {
                 target.style.border = '1px solid red';
                 errorMsg.style.display = 'block';
@@ -44,6 +43,7 @@ function CreatorDetails2() {
         }
         if (errorArr.length) return;
         context.handleSubmit('SUBMIT', context.state.inputTypeArray);
+        context.onChangeHeading('DISPLAY_HEADING', context.headingState.heading.title);
     }
 
     return (
@@ -54,12 +54,17 @@ function CreatorDetails2() {
                         context.state.inputTypeArray.length > 0 &&
                         context.state.inputTypeArray.map(items => (
                             <div key={items.id} className='creator_details_inner' >
-                                <label>{items.inputLabel}</label>
+                                <label>
+                                    {items.inputLabel[0].toUpperCase() + items.inputLabel.substring(1)}
+                                </label>
                                 <input
                                     type={items.type}
                                     id={items.id}
                                     onChange={onChangeInput} />
-                                <p style={{ display: 'none' }}> *please enter {items.inputLabel} </p>
+                                <p style={{ display: 'none' }}>
+                                    *please enter {items.inputLabel[0].toUpperCase() +
+                                        items.inputLabel.substring(1)}
+                                </p>
                             </div>
                         ))
                     }
