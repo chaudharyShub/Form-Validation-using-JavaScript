@@ -1,13 +1,23 @@
 {
   "files": {
-    "main.css": "/Form-Validation-using-JavaScript/static/css/main.b439fa67.css",
-    "main.js": "/Form-Validation-using-JavaScript/static/js/main.597d8508.js",
+    "main.css": "/Form-Validation-using-JavaScript/static/css/main.6798c136.css",
+    "main.js": "/Form-Validation-using-JavaScript/static/js/main.ceae93d1.js",
+    "static/css/433.833b962c.chunk.css": "/Form-Validation-using-JavaScript/static/css/433.833b962c.chunk.css",
+    "static/js/433.b2278002.chunk.js": "/Form-Validation-using-JavaScript/static/js/433.b2278002.chunk.js",
+    "static/css/428.43762ccb.chunk.css": "/Form-Validation-using-JavaScript/static/css/428.43762ccb.chunk.css",
+    "static/js/428.67bad4be.chunk.js": "/Form-Validation-using-JavaScript/static/js/428.67bad4be.chunk.js",
     "index.html": "/Form-Validation-using-JavaScript/index.html",
-    "main.b439fa67.css.map": "/Form-Validation-using-JavaScript/static/css/main.b439fa67.css.map",
-    "main.597d8508.js.map": "/Form-Validation-using-JavaScript/static/js/main.597d8508.js.map"
+    "static/media/edit.svg": "/Form-Validation-using-JavaScript/static/media/edit.1bd74fe21bfba125243d0325c9300f0c.svg",
+    "static/media/trash.svg": "/Form-Validation-using-JavaScript/static/media/trash.d55ba7a6c87c02d88d37de2110530e0e.svg",
+    "main.6798c136.css.map": "/Form-Validation-using-JavaScript/static/css/main.6798c136.css.map",
+    "main.ceae93d1.js.map": "/Form-Validation-using-JavaScript/static/js/main.ceae93d1.js.map",
+    "433.833b962c.chunk.css.map": "/Form-Validation-using-JavaScript/static/css/433.833b962c.chunk.css.map",
+    "433.b2278002.chunk.js.map": "/Form-Validation-using-JavaScript/static/js/433.b2278002.chunk.js.map",
+    "428.43762ccb.chunk.css.map": "/Form-Validation-using-JavaScript/static/css/428.43762ccb.chunk.css.map",
+    "428.67bad4be.chunk.js.map": "/Form-Validation-using-JavaScript/static/js/428.67bad4be.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b439fa67.css",
-    "static/js/main.597d8508.js"
+    "static/css/main.6798c136.css",
+    "static/js/main.ceae93d1.js"
   ]
 }
