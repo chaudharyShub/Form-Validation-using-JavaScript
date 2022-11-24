@@ -1,9 +1,9 @@
 import './App.css';
-import { createContext, useReducer } from 'react';
-import { initialState, reducer } from './reducer';
-import { headingReducer, initialHeadingState } from './HeadingReducer';
-import Creator from './Components/Creator/Creator';
-import User from './Components/User/User';
+import React, { createContext, useReducer } from 'react';
+import { initialState, reducer } from './Components/Context/reducer';
+import { headingReducer, initialHeadingState } from './Components/Context/HeadingReducer';
+import Navbar from './Components/Navbar/Navbar';
+import Element from './Components/Element';
 
 export const StateContext = createContext();
 
@@ -28,16 +28,14 @@ function App() {
   }
 
   return (
-    <StateContext.Provider value={value}>
-      <div className='app_main'>
-        <div className="creator">
-          <Creator />
-        </div>
-        <div className="user">
-          <User />
-        </div>
-      </div>
-    </StateContext.Provider>
+    <div className='app_main'>
+      <StateContext.Provider value={value}>
+        <Navbar />
+        <React.Suspense fallback="Loading... Please Wait">
+          <Element />
+        </React.Suspense>
+      </StateContext.Provider>
+    </div>
   );
 }
 

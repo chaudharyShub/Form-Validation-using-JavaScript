@@ -1,0 +1,70 @@
+.form_list_main {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    padding: 10px;
+}
+
+.form_list_main h4 {
+    font-size: 2.2rem;
+    filter: drop-shadow(3px 3px 2px #0d6efd);
+    margin: 10px auto;
+}
+
+.form_list_card {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    min-height: 10em;
+    border-radius: 10px;
+    padding: 25px 15px 15px 15px;
+    background-color: white;
+    transition: 0.2s ease;
+    min-width: 18em;
+    width: 30%;
+    position: relative;
+}
+
+.form_list_card:hover {
+    box-shadow: 0 0 10px gray;
+    scale: 1.05;
+}
+
+.edit_delete_container {
+    /* border: 1px solid black; */
+    display: flex;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    gap: 1em;
+}
+
+.edit_delete_container button {
+    all: unset;
+}
+
+.delete {
+    width: 1.5em;
+    cursor: pointer;
+    filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%);
+}
+
+.edit {
+    width: 1.5em;
+    cursor: pointer;
+    filter: invert(80%) sepia(5%) saturate(10000%) hue-rotate(30deg);
+}
+
+.form_list_values {
+    display: flex;
+}
+
+.form_list_values b,
+p {
+    text-transform: capitalize;
+}
+
+.form_list_values span {
+    margin: 0 4px;
+}

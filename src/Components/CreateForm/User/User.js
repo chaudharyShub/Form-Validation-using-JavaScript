@@ -1,11 +1,39 @@
-import React, { useContext } from 'react';
-import { StateContext } from '../../App';
+import React, { useContext, useEffect } from 'react';
+import { StateContext } from '../../../App';
 import './User.css';
 
 function User() {
 
     const context = useContext(StateContext);
     const heading = context.headingState.displayedHeading;
+    const contextStateOutputItems = context.state.outputItems;
+    const arr = [];
+
+    const setItemInObject = () => {
+        const formObject = {};
+        formObject['heading'] = heading;
+        for (let i = 0; i < contextStateOutputItems.length; i++) {
+            formObject[contextStateOutputItems[i].inputLabel] = contextStateOutputItems[i].inputValue;
+        }
+        arr.push(formObject);
+    }
+
+    useEffect(() => {
+        setItemInObject();
+    });
+
+    const handleSubmitDetails = () => {
+        let output = localStorage.getItem('output');
+        if (output === null) {
+            output = [...arr];
+        } else {
+            const a = JSON.parse(output);
+            output = [...a, ...arr];
+        }
+        localStorage.setItem('output', JSON.stringify(output));
+        alert('Form Submitted Successfully!');
+        window.location.reload(true);
+    }
 
     return (
         <div className='user_main'>
@@ -20,10 +48,10 @@ function User() {
                         : null
                 }
                 {
-                    context.state.outputItems.length
+                    contextStateOutputItems.length
                         ? <div>
                             {
-                                context.state.outputItems.map((element, index) => (
+                                contextStateOutputItems.map((element, index) => (
                                     <div key={index} className='output_items'>
                                         <p className='key'>
                                             {element.inputLabel.toUpperCase()}
@@ -35,10 +63,11 @@ function User() {
                                     </div>
                                 ))
                             }
-                            <button className='btn btn-primary' onClick={() => {
-                                alert('Form Submitted Successfully!');
-                                window.location.reload(true);
-                            }}>Submit</button>
+                            <button
+                                className='btn btn-primary'
+                                onClick={handleSubmitDetails}>
+                                Submit
+                            </button>
                         </div>
                         : <h6>Please submit a value!</h6>
                 }

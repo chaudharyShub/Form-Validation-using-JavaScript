@@ -1,0 +1,17 @@
+    // const mappedVals = []
+
+    // if (arr.length > 0) {
+    //     arr.map(element => {
+    //         for (let key in element) {
+    //             mappedVals.push(<div>{key} : {element[key]}</div>)
+    //         }
+    //     })
+    // }
+
+    // return (
+    //     <div>
+    //         {
+    //             mappedVals.length > 0 ? mappedVals : 'No items'
+    //         }
+    //     </div>
+    // );

@@ -1,0 +1,6 @@
+.form_navigation_bar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../../../App';
+import { StateContext } from '../../../../App';
 import './CreatorDetails.css';
 
 function CreatorDetails2() {

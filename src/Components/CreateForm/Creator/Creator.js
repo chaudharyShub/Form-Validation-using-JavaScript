@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StateContext } from '../../App';
+import { StateContext } from '../../../App';
 import CreatorDetails2 from './CreatorDetails/CreatorDetails2';
 import './Creator.css';
 
