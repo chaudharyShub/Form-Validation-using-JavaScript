@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { StateContext } from '../../App';
 import './FormList.css';
 import trash from '../../images/trash.svg';
 import edit from '../../images/edit.svg';
+import { useNavigate } from 'react-router-dom';
 
 function FormList() {
 
+    const context = useContext(StateContext);
+    const navigate = useNavigate();
     const arr = JSON.parse(localStorage.getItem('output'));
-
     const [outputArray, setOutputArray] = useState(arr);
+
+    console.log(context.editArrayState);
 
     const style = {
         fontSize: '2rem',
@@ -24,15 +29,17 @@ function FormList() {
         });
     });
 
-    const handleEditCard = () => {
-        console.log('edit button clicked');
+    const handleEditCard = (element) => {
+        context.handleEdit('EDIT_ARRAY', element);
+        // navigate('/create-form');
     }
 
     const handleDeleteCard = (index) => {
-        outputArray.splice(index, 1);
-        setOutputArray([...outputArray]);
-        localStorage.setItem('output', JSON.stringify(outputArray));
-        alert('Form DELETED Successfully!');
+        // outputArray.splice(index, 1);
+        // setOutputArray([...outputArray]);
+        // localStorage.setItem('output', JSON.stringify(outputArray));
+        // alert('Form DELETED Successfully!');
+        console.log('delete button clicked');
     }
 
     return (
@@ -43,7 +50,7 @@ function FormList() {
                         return (
                             <div key={index} className='form_list_card'>
                                 <div className='edit_delete_container'>
-                                    <button onClick={handleEditCard}><img id='edit' className='edit' src={edit} /></button>
+                                    <button onClick={() => handleEditCard(element)}><img id='edit' className='edit' src={edit} /></button>
                                     <button onClick={() => handleDeleteCard(index)}><img id='delete' className='delete' src={trash} /></button>
                                 </div>
                                 {element.map((item, insideIndex) => {
@@ -61,7 +68,7 @@ function FormList() {
                                 })}
                             </div>
                         )
-                    }) : <h4>Please submit a form to view !</h4>
+                    }) : <h4>No items founds !</h4>
             }
         </div>
     )
