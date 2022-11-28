@@ -1,10 +1,10 @@
-import './App.css';
 import React, { createContext, useReducer } from 'react';
 import { reducer, initialState } from './Components/Context/reducer';
 import { headingReducer, initialHeadingState } from './Components/Context/HeadingReducer';
-import { editReducer, initialEditState } from './Components/Context/EditReducer';
 import Navbar from './Components/Navbar/Navbar';
 import Element from './Components/Element';
+import './App.css';
+import { initialUpdateState, updateReducer } from './Components/Context/updateReducer';
 
 export const StateContext = createContext();
 
@@ -12,7 +12,7 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [headingState, headingDispatch] = useReducer(headingReducer, initialHeadingState);
-  const [editArrayState, editArrayDispatch] = useReducer(editReducer, initialEditState)
+  const [edit, dispatchEdit] = useReducer(updateReducer, initialUpdateState);
 
   const handleSubmit = (type, payload) => {
     dispatch({ type: type, payload: payload });
@@ -21,9 +21,12 @@ function App() {
   const onChangeHeading = (type, payload) => {
     headingDispatch({ type: type, payload: payload });
   }
+  const onChangeField = (type, payload) => {
+    dispatch({ type: type, payload: payload });
+  }
 
-  const handleEdit = (type, payload) => {
-    editArrayDispatch({ type: type, payload: payload });
+  const onUpdate = (type, payload) => {
+    dispatchEdit({ type: type, payload: payload });
   }
 
   const value = {
@@ -32,9 +35,9 @@ function App() {
 
     onChangeHeading,
     headingState,
-
-    handleEdit,
-    editArrayState
+    onChangeField,
+    onUpdate,
+    edit
   }
 
   return (

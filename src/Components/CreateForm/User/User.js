@@ -6,16 +6,18 @@ function User() {
 
     const context = useContext(StateContext);
     const heading = context.headingState.displayedHeading;
-    const contextStateOutputItems = context.state.outputItems;
     const arr = [];
+    let localObject;
 
     const setItemInObject = () => {
         const formObject = {};
         formObject['heading'] = heading;
-        for (let i = 0; i < contextStateOutputItems.length; i++) {
-            formObject[contextStateOutputItems[i].inputLabel] = contextStateOutputItems[i].inputValue;
+        for (let i = 0; i < context.state.outputItems.length; i++) {
+            formObject[context.state.outputItems[i].inputLabel] =
+                `${context.state.outputItems[i].inputValue}|${context.state.outputItems[i].id}|${context.state.outputItems[i].type}`;
         }
         arr.push(formObject);
+        localObject = formObject;
     }
 
     useEffect(() => {
@@ -24,15 +26,25 @@ function User() {
 
     const handleSubmitDetails = () => {
         let output = localStorage.getItem('output');
-        if (output === null) {
-            output = [...arr];
-        } else {
+        if (context.edit.update) {
             const a = JSON.parse(output);
-            output = [...a, ...arr];
+            a.splice(context.edit.index, 1, localObject);
+            output = [...a];
+            localStorage.setItem('output', JSON.stringify(output));
+            alert('Form UPDATED !');
+            window.location.reload(true);
         }
-        localStorage.setItem('output', JSON.stringify(output));
-        alert('Form Submitted Successfully!');
-        window.location.reload(true);
+        else {
+            if (output === null) {
+                output = [...arr];
+            } else {
+                const a = JSON.parse(output);
+                output = [...a, ...arr];
+            }
+            localStorage.setItem('output', JSON.stringify(output));
+            alert('Form Submitted Successfully!');
+            window.location.reload(true);
+        }
     }
 
     return (
@@ -48,17 +60,17 @@ function User() {
                         : null
                 }
                 {
-                    contextStateOutputItems.length
+                    context.state.outputItems.length
                         ? <div>
                             {
-                                contextStateOutputItems.map((element, index) => (
-                                    <div key={index} className='output_items'>
+                                context.state.outputItems.map((element, index) => (
+                                    <div id={element.id} type={element.type} key={index} className='output_items'>
                                         <p className='key'>
                                             {element.inputLabel.toUpperCase()}
                                         </p>
                                         <span>:</span>
                                         <p className='value'>
-                                            {element.inputValue[0].toUpperCase() + element.inputValue.substring(1)}
+                                            {element.inputValue[0]?.toUpperCase() + element.inputValue.substring(1)}
                                         </p>
                                     </div>
                                 ))
@@ -66,7 +78,7 @@ function User() {
                             <button
                                 className='btn btn-primary'
                                 onClick={handleSubmitDetails}>
-                                Submit
+                                {context.edit.update ? 'Update' : 'Submit'}
                             </button>
                         </div>
                         : <h6>Please submit a value!</h6>

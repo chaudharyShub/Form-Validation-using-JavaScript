@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../../App';
 import './FormList.css';
 import trash from '../../images/trash.svg';
 import edit from '../../images/edit.svg';
-import { useNavigate } from 'react-router-dom';
 
 function FormList() {
 
@@ -11,8 +11,6 @@ function FormList() {
     const navigate = useNavigate();
     const arr = JSON.parse(localStorage.getItem('output'));
     const [outputArray, setOutputArray] = useState(arr);
-
-    console.log(context.editArrayState);
 
     const style = {
         fontSize: '2rem',
@@ -29,17 +27,37 @@ function FormList() {
         });
     });
 
-    const handleEditCard = (element) => {
-        context.handleEdit('EDIT_ARRAY', element);
-        // navigate('/create-form');
+    const handleEditCard = (index) => {
+        const arrayToBeEdited = [];
+        for (const key in outputArray[index]) {
+            const obj = {
+                inputLabel: '',
+                type: '',
+                inputChildError: false,
+                inputValue: '',
+                id: '',
+            }
+            let a = outputArray[index][key].split('|');
+            if (key === 'heading') context.onChangeHeading('ADD_HEADING', outputArray[index].heading);
+            else {
+                obj.inputLabel = key;
+                obj.type = a[2];
+                obj.inputChildError = false;
+                obj.inputValue = a[0];
+                obj.id = a[1];
+                arrayToBeEdited.push(obj);
+            }
+        }
+        context.handleSubmit('EDIT_ARRAY', arrayToBeEdited);
+        context.onUpdate('UPDATE', index);
+        navigate('/create-form');
     }
 
     const handleDeleteCard = (index) => {
-        // outputArray.splice(index, 1);
-        // setOutputArray([...outputArray]);
-        // localStorage.setItem('output', JSON.stringify(outputArray));
-        // alert('Form DELETED Successfully!');
-        console.log('delete button clicked');
+        outputArray.splice(index, 1);
+        setOutputArray([...outputArray]);
+        localStorage.setItem('output', JSON.stringify(outputArray));
+        alert('Form DELETED Successfully!');
     }
 
     return (
@@ -50,19 +68,22 @@ function FormList() {
                         return (
                             <div key={index} className='form_list_card'>
                                 <div className='edit_delete_container'>
-                                    <button onClick={() => handleEditCard(element)}><img id='edit' className='edit' src={edit} /></button>
+                                    <button onClick={() => handleEditCard(index)}><img id='edit' className='edit' src={edit} /></button>
                                     <button onClick={() => handleDeleteCard(index)}><img id='delete' className='delete' src={trash} /></button>
                                 </div>
                                 {element.map((item, insideIndex) => {
                                     return (
-                                        <div key={insideIndex} className='form_list_values'>
+                                        <div key={insideIndex}
+                                            className='form_list_values'>
                                             {item.name === 'heading'
                                                 ? null
                                                 : <>
                                                     <b><p>{item.name}</p></b>
                                                     <span> : </span>
                                                 </>}
-                                            <p style={item.name === 'heading' ? style : null}>{item.value}</p>
+                                            <p style={item.name === 'heading' ? style : null}>
+                                                {item.value.split('|')[0]}
+                                            </p>
                                         </div>
                                     )
                                 })}

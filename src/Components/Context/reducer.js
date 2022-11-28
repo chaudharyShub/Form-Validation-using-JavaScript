@@ -18,7 +18,12 @@ export const reducer = (state, action) => {
         case 'UPDATE_INPUT':
             return {
                 ...state,
-                inputTypeArray: [...state.inputTypeArray, action.payload]
+                inputTypeArray: action.payload
+            }
+        case 'EDIT_ARRAY':
+            return {
+                ...state,
+                inputTypeArray: [...action.payload]
             }
         default:
             return state;

@@ -6,6 +6,7 @@ import './Creator.css';
 function Creator() {
 
     const context = useContext(StateContext);
+    // const [headingValue, setHeadingValue] = useState(context.headingState.heading.title || '');
 
     const style = {
         errorStyle: { border: '1.2px solid red' },
@@ -51,7 +52,7 @@ function Creator() {
         const obj = {
             inputLabel: inputDetail.labelName,
             type: inputDetail.inputType,
-            inputChildError: true,
+            inputChildError: false,
             inputValue: '',
             id: Date.now().toString(),
         }
@@ -104,6 +105,7 @@ function Creator() {
                         type='text'
                         placeholder='Enter Title here...'
                         id='heading'
+                        value={context.headingState.heading.title}
                         style={context.headingState.heading.isError ? style.errorStyle : style.simpleStyleHeading}
                         onChange={e => context.onChangeHeading('ADD_HEADING', e.target.value)}
                     />
