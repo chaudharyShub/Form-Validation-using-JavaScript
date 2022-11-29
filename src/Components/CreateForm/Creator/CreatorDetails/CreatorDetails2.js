@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { StateContext } from '../../../../App';
 import './CreatorDetails.css';
 
 function CreatorDetails2() {
 
     const context = useContext(StateContext);
-    // const location = useLocation();
-    // console.log(location);
     // const [value, setValue] = useState([]);
 
     const onChangeInput = (e, id) => {

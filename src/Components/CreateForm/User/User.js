@@ -1,8 +1,39 @@
 import React, { useContext, useEffect } from 'react';
 import { StateContext } from '../../../App';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './User.css';
 
 function User() {
+
+    const notify = (status, message) => {
+        if (status === 'SUCCESS') {
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                className: 'toast-message-success',
+                pauseOnHover: false,
+                autoClose: 2000,
+                theme:"colored"
+            });
+            return;
+        }
+        else if (status === 'UPDATE') {
+            toast.info(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                className: 'toast-message-info',
+                pauseOnHover: false,
+                autoClose: 2000,
+                theme:"dark"
+            });
+            return;
+        }
+    };
+
+    const reloadWindow = () => {
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 3000);
+    }
 
     const context = useContext(StateContext);
     const heading = context.headingState.displayedHeading;
@@ -31,8 +62,8 @@ function User() {
             a.splice(context.edit.index, 1, localObject);
             output = [...a];
             localStorage.setItem('output', JSON.stringify(output));
-            alert('Form UPDATED !');
-            window.location.reload(true);
+            notify('UPDATE', 'Form Updated Successfully');
+            reloadWindow();
         }
         else {
             if (output === null) {
@@ -42,49 +73,52 @@ function User() {
                 output = [...a, ...arr];
             }
             localStorage.setItem('output', JSON.stringify(output));
-            alert('Form Submitted Successfully!');
-            window.location.reload(true);
+            notify('SUCCESS', 'Form Submitted Successfully');
+            reloadWindow();
         }
     }
 
     return (
-        <div className='user_main'>
-            <h2>Preview :</h2>
-            <div className='user_main_inner'>
-                {
-                    heading
-                        ? <h3>
-                            {heading[0].toUpperCase() +
-                                heading.substring(1)}
-                        </h3>
-                        : null
-                }
-                {
-                    context.state.outputItems.length
-                        ? <div>
-                            {
-                                context.state.outputItems.map((element, index) => (
-                                    <div id={element.id} type={element.type} key={index} className='output_items'>
-                                        <p className='key'>
-                                            {element.inputLabel.toUpperCase()}
-                                        </p>
-                                        <span>:</span>
-                                        <p className='value'>
-                                            {element.inputValue[0]?.toUpperCase() + element.inputValue.substring(1)}
-                                        </p>
-                                    </div>
-                                ))
-                            }
-                            <button
-                                className='btn btn-primary'
-                                onClick={handleSubmitDetails}>
-                                {context.edit.update ? 'Update' : 'Submit'}
-                            </button>
-                        </div>
-                        : <h6>Please submit a value!</h6>
-                }
+        <>
+            <ToastContainer />
+            <div className='user_main'>
+                <h2>Preview :</h2>
+                <div className='user_main_inner'>
+                    {
+                        heading
+                            ? <h3>
+                                {heading[0].toUpperCase() +
+                                    heading.substring(1)}
+                            </h3>
+                            : null
+                    }
+                    {
+                        context.state.outputItems.length
+                            ? <div>
+                                {
+                                    context.state.outputItems.map((element, index) => (
+                                        <div id={element.id} type={element.type} key={index} className='output_items'>
+                                            <p className='key'>
+                                                {element.inputLabel.toUpperCase()}
+                                            </p>
+                                            <span>:</span>
+                                            <p className='value'>
+                                                {element.inputValue[0]?.toUpperCase() + element.inputValue.substring(1)}
+                                            </p>
+                                        </div>
+                                    ))
+                                }
+                                <button
+                                    className='btn btn-primary'
+                                    onClick={handleSubmitDetails}>
+                                    {context.edit.update ? 'Update' : 'Submit'}
+                                </button>
+                            </div>
+                            : <h6>Please submit a value!</h6>
+                    }
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

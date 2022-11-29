@@ -1,11 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../../App';
-import './FormList.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import trash from '../../images/trash.svg';
 import edit from '../../images/edit.svg';
+import './FormList.css';
 
 function FormList() {
+
+    const notify = () => {
+        toast.success("Form DELETED Successfully", {
+            position: toast.POSITION.TOP_CENTER,
+            pauseOnHover: false,
+            autoClose: 2000,
+            theme:"colored",
+        });
+    }
 
     const context = useContext(StateContext);
     const navigate = useNavigate();
@@ -57,41 +68,44 @@ function FormList() {
         outputArray.splice(index, 1);
         setOutputArray([...outputArray]);
         localStorage.setItem('output', JSON.stringify(outputArray));
-        alert('Form DELETED Successfully!');
+        notify();
     }
 
     return (
-        <div className='form_list_main'>
-            {
-                localityParameterSets && localityParameterSets.length > 0 ?
-                    localityParameterSets.map((element, index) => {
-                        return (
-                            <div key={index} className='form_list_card'>
-                                <div className='edit_delete_container'>
-                                    <button onClick={() => handleEditCard(index)}><img id='edit' className='edit' src={edit} /></button>
-                                    <button onClick={() => handleDeleteCard(index)}><img id='delete' className='delete' src={trash} /></button>
+        <>
+            <ToastContainer />
+            <div className='form_list_main'>
+                {
+                    localityParameterSets && localityParameterSets.length > 0 ?
+                        localityParameterSets.map((element, index) => {
+                            return (
+                                <div key={index} className='form_list_card'>
+                                    <div className='edit_delete_container'>
+                                        <button onClick={() => handleEditCard(index)}><img id='edit' className='edit' src={edit} /></button>
+                                        <button onClick={() => handleDeleteCard(index)}><img id='delete' className='delete' src={trash} /></button>
+                                    </div>
+                                    {element.map((item, insideIndex) => {
+                                        return (
+                                            <div key={insideIndex}
+                                                className='form_list_values'>
+                                                {item.name === 'heading'
+                                                    ? null
+                                                    : <>
+                                                        <b><p>{item.name}</p></b>
+                                                        <span> : </span>
+                                                    </>}
+                                                <p style={item.name === 'heading' ? style : null}>
+                                                    {item.value.split('|')[0]}
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                                {element.map((item, insideIndex) => {
-                                    return (
-                                        <div key={insideIndex}
-                                            className='form_list_values'>
-                                            {item.name === 'heading'
-                                                ? null
-                                                : <>
-                                                    <b><p>{item.name}</p></b>
-                                                    <span> : </span>
-                                                </>}
-                                            <p style={item.name === 'heading' ? style : null}>
-                                                {item.value.split('|')[0]}
-                                            </p>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        )
-                    }) : <h4>No items founds !</h4>
-            }
-        </div>
+                            )
+                        }) : <h4>No items founds !</h4>
+                }
+            </div>
+        </>
     )
 }
 
